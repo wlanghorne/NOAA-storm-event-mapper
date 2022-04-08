@@ -30,7 +30,7 @@ if path_has_csvs(inputs_path):
 parsed_csv_names = path_has_csvs(parsed_path)
 if path_has_csvs(parsed_path):
 	for parsed_csv_name in parsed_csv_names:
-		create_geojson(os.path.join(parsed_path, parsed_csv_name), geojson_path, os.path.join(geojson_path, parsed_csv_name))
+		create_geojson(os.path.join(parsed_path, parsed_csv_name), geojson_path, os.path.join(geojson_path, parsed_csv_name.replace('csv','geojson')))
 
 
 else: 
