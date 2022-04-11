@@ -1,4 +1,4 @@
-# NOAA-storm-event-mapper
+# noaa-storm-event-mapper
 
 Processes storm data collected by [NOAA](https://www.ncdc.noaa.gov/stormevents/) since 1950 into a GeoJSON file that can be used for map making. Also includes a sample Leaflet map for representing the data. 
 
