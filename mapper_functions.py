@@ -6,11 +6,11 @@ def find_csv_files(path_to_dir, file_type=".csv"):
   file_names = os.listdir(path_to_dir)
   return [file_name for file_name in file_names if file_name.endswith(file_type)]
 
-def path_has_csvs(inputs_path):
-	if not os.path.isdir(inputs_path):
+def path_has_csvs(path):
+	if not os.path.isdir(path):
 		return False
 	else: 
-		return find_csv_files(inputs_path)
+		return find_csv_files(path)
 
 def parse_csv_files(inputs_path, parse_path, state, event):
 	input_names = find_csv_files(inputs_path)
