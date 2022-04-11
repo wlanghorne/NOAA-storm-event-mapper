@@ -5,7 +5,7 @@ import sys
 # Paths 
 inputs_path = './inputs/'
 parsed_path = './parsed/'
-geojson_path = './GeoJSONs/'
+geojson_path = './leaflet-map/geojson/'
 
 # Default state for mapping = AR
 state_to_map = 'ARKANSAS'

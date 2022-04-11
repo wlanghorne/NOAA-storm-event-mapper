@@ -1,17 +1,9 @@
 <html>
 <head>
-  <title>A Leaflet map!</title>
-   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-   crossorigin=""/>
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-   crossorigin=""></script>
-  <script src="js/leaflet-providers.js"></script>
-
-
-
+  <title>AR Tornadoes</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+  <script src="js/jquery-2.1.1.min.js"></script>
   <style>
     #map{ width: 500px; height: 500px; }
   </style>
@@ -22,21 +14,21 @@
 
   <script>
   // initialize the map
-  var map = L.map('map').setView([34.6, -92.5], 7);
-  L.tileLayer.provider('Stamen.TonerLite').addTo(map);
-  
-  var tornadoes = new L.geoJson();
-  tornadoes.addTo(map);
+  var map = L.map('map').setView([35.0, -92.0], 7);
 
-  $.ajax({
-    dataType: "json",
-    url: "tornado.geojson",
-    success: function(data) {
-      $(data.features).each(function(key, data) {
-        tornadoes.addData(data);
-      });
-    }
-  }).error(function() {});
+  // add base tile layer
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 13,
+      minZoom: 1
+    }).addTo(map);
+
+  //import GeoJSON file 
+  $.getJSON("../GeoJSON/NOAA_ARKANSAS_tornado.geojson",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data).addTo(map);
+  });
 
   </script>
 </body>

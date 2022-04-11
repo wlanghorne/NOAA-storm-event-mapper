@@ -61,10 +61,10 @@ def create_geojson(csv_path, geojson_path, geojson_file_path):
 	      long2 = row[47]
 	      if lat1 and long1 and lat2 and long2:
 	         line = LineString([[float(long1), float(lat1)], [float(long2), float(lat2)]])
-	         features.append(Feature(geometry=line, properties={"storm": "Tornado"}))
+	         features.append(Feature(geometry=line, properties={"style":{"color":"red"}}))
 	      elif lat1 and long1:
 	         point = Point([float(long1), float(lat1)])
-	         features.append(Feature(geometry=point, properties={"storm": "Tornado"}))
+	         features.append(Feature(geometry=point, properties={}))
 	   f.close()
 
 	# add more features...
