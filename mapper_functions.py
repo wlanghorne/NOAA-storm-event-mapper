@@ -59,16 +59,30 @@ def create_geojson(csv_path, geojson_path, geojson_file_path):
 	        long1 = row[45]
 	        lat2 = row[46]
 	        long2 = row[47]
+	        # property values 
 	        scale = row[31]
+	        narrative = row[49]
+	        injuries = row[20] + row[21]
+	        deaths = row[22] + row[23]
+	        prop_damage = row[24]
+	        date = row[0][4:] + '/' + row[1] + '/' + row[0][:4]
+	        # create properties
+	        properties = {"date" : date,
+	        			  "scale": scale, 
+	            		  "injuries": injuries,
+	            		  "deaths": deaths,
+	            		  "prop_damage": prop_damage,
+	            		  "narrative": narrative}
+	        narrative = row[49]
 	        if lat1 and long1 and lat2 and long2:
 	            line = LineString([[float(long1), float(lat1)], [float(long2), float(lat2)]])
-	            features.append(Feature(geometry=line, properties={"scale": scale}))
+	            features.append(Feature(geometry=line, properties= properties))
 	        elif lat1 and long1:
 	            line = LineString([[float(long1), float(lat1)], [float(long1), float(lat1)]])
-	            features.append(Feature(geometry=line, properties={"scale": scale}))
+	            features.append(Feature(geometry=line, properties= properties))
 	        elif lat2 and long2:
 	            line = LineString([[float(long2), float(lat2)], [float(long2), float(lat2)]])
-	            features.append(Feature(geometry=line, properties={"scale": scale}))
+	            features.append(Feature(geometry=line, properties= properties))
 	    f.close()
 
 	# add more features...
