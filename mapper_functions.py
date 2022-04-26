@@ -66,13 +66,17 @@ def create_geojson(csv_path, geojson_path, geojson_file_path):
 	        deaths = row[22] + row[23]
 	        prop_damage = row[24]
 	        date = row[0][4:] + '/' + row[1] + '/' + row[0][:4]
+	        width = row[33]
+	        year = row[10]
 	        # create properties
 	        properties = {"date" : date,
 	        			  "scale": scale, 
 	            		  "injuries": injuries,
 	            		  "deaths": deaths,
 	            		  "prop_damage": prop_damage,
-	            		  "narrative": narrative}
+	            		  "narrative": narrative,
+	            		  "width" : width,
+	            		  "year" : year}
 	        narrative = row[49]
 	        if lat1 and long1 and lat2 and long2:
 	            line = LineString([[float(long1), float(lat1)], [float(long2), float(lat2)]])

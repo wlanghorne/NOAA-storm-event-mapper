@@ -1,7 +1,8 @@
-// initialize the map
-var map = L.map('map').setView([34.8, -92.3], 7);
-map.options.minZoom = 7;
-map.options.maxZoom = 13;
+// constants 
+RED = "#E74C3C";
+ORANGE = "#E67E22";
+YELLOW = "#F1C40F";
+UNSPEC = "#3388ff"
 
 
 // styles for map layers 
@@ -11,31 +12,39 @@ var countyStyle = {
 };
 
 var darkStyle = {
-  "color": "#E74C3C",
+  "color": RED,
   "weight": 3,
-  "opacity": 0.9
+  "opacity": 1
 };
 
 var midStyle = {
-  "color": "#E67E22",
-  "weight": 2,
-  "opacity": 0.7
+  "color": ORANGE,
+  "weight": 3,
+  "opacity": 0.8
 };
 
 var lightStyle = {
-  "color": "#F1C40F",
-  "weight": 1,
+  "color": YELLOW,
+  "weight": 3,
   "opacity": 0.6
 };
+
+
+// initialize the map
+var map = L.map('map').setView([34.8, -92.3], 7);
+map.options.minZoom = 7;
+map.options.maxZoom = 13; 
 
 
 // import GeoJSONs
 L.geoJson(countyData, {style: countyStyle}).addTo(map);
 
-$.getJSON("./geojson/NOAA_ARKANSAS_tornado.geojson",function(data){
+$.getJSON("./geojson/NOAA_ARKANSAS_tornado.geojson", function(data){
   // add GeoJSON layer to the map once the file is loaded
-  L.geoJson(data, {
+  var tornadolayer = L.geoJson(data, {
     style: function(feature) {
+
+      // format color
       switch (feature.properties.scale) {
           case 'F0' : return lightStyle;
           case 'F1' :   return lightStyle;
@@ -52,6 +61,7 @@ $.getJSON("./geojson/NOAA_ARKANSAS_tornado.geojson",function(data){
         }
       },
 
+    // add popups 
     onEachFeature: function(feature, layer) {
       // get popup text
       var popup_text = '';
@@ -88,5 +98,37 @@ $.getJSON("./geojson/NOAA_ARKANSAS_tornado.geojson",function(data){
         layer.bindPopup(popup_text);
       }
     }
-  }).addTo(map);
+
+  })
+
+  // format slider
+    sliderControl = L.control.sliderControl({
+        position: "topright",
+        layer: tornadolayer, 
+        timeAttribute: "year",
+        range: true,
+        showAllOnStart: true,
+        start_date: "1950",
+        end_date: "2021"
+    });
+
+    map.addControl(sliderControl);
+    sliderControl.startSlider(); 
 });
+
+// add legend 
+var legend = L.control({position: "bottomleft"});
+legend.onAdd = function (map) {
+
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += "<strong>Severity</strong></br>"
+  div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + YELLOW + "; border-radius: 50%; display: inline-block;'></span><span>  F0-F1 or EF0-EF1</span><br>"
+  div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + ORANGE + "; border-radius: 50%; display: inline-block;'></span><span>  F2-F3 or EF2-EF3</span><br>"
+  div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + RED + "; border-radius: 50%; display: inline-block;'></span><span>  F4-F5 or EF4-EF5</span><br>"
+  div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + UNSPEC + "; border-radius: 50%; display: inline-block;'></span><span>  Unknown severity</span><br>"
+  return div;
+
+};
+
+legend.addTo(map);
+
