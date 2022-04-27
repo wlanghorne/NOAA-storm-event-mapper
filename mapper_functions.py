@@ -69,7 +69,7 @@ def create_geojson(csv_path, geojson_path, geojson_file_path):
 	        # add leading zeros 
 	        if len(day) == 1:
 	        	day = '0'+ day
-	        date = row[0][4:] + '/' + day + '/' + row[0][:4][2:]
+	        date = row[0][4:] + '/' + day + '/' + row[0][:4]
 	        width = row[33]
 	        year = row[10]
 	        # create properties
