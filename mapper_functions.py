@@ -65,7 +65,11 @@ def create_geojson(csv_path, geojson_path, geojson_file_path):
 	        injuries = row[20] + row[21]
 	        deaths = row[22] + row[23]
 	        prop_damage = row[24]
-	        date = row[0][4:] + '/' + row[1] + '/' + row[0][:4]
+	        day = row[1]
+	        # add leading zeros 
+	        if len(day) == 1:
+	        	day = '0'+ day
+	        date = row[0][4:] + '/' + day + '/' + row[0][:4][2:]
 	        width = row[33]
 	        year = row[10]
 	        # create properties

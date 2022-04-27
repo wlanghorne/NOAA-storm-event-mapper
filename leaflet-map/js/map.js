@@ -105,11 +105,11 @@ $.getJSON("./geojson/NOAA_ARKANSAS_tornado.geojson", function(data){
     sliderControl = L.control.sliderControl({
         position: "topright",
         layer: tornadolayer, 
-        timeAttribute: "year",
+        timeAttribute: "date",
         range: true,
         showAllOnStart: true,
-        start_date: "1950",
-        end_date: "2021"
+        start_date: "01/13/1950",
+        end_date: "12/10/2021"
     });
 
     map.addControl(sliderControl);
