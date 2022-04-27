@@ -126,6 +126,8 @@ legend.onAdd = function (map) {
   div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + ORANGE + "; border-radius: 50%; display: inline-block;'></span><span>  F2-F3 or EF2-EF3</span><br>"
   div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + RED + "; border-radius: 50%; display: inline-block;'></span><span>  F4-F5 or EF4-EF5</span><br>"
   div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + UNSPEC + "; border-radius: 50%; display: inline-block;'></span><span>  Unknown severity</span><br>"
+
+  div.style = "background-color: white; padding: 5px; border: 1px solid black; border-radius: 5px"
   return div;
 
 };
