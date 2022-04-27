@@ -103,7 +103,7 @@ $.getJSON("./geojson/NOAA_ARKANSAS_tornado.geojson", function(data){
 
   // format slider
     sliderControl = L.control.sliderControl({
-        position: "topright",
+        position: "bottomright",
         layer: tornadolayer, 
         timeAttribute: "date",
         range: true,
@@ -122,9 +122,9 @@ legend.onAdd = function (map) {
 
   var div = L.DomUtil.create("div", "legend");
   div.innerHTML += "<strong>Severity</strong></br>"
-  div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + YELLOW + "; border-radius: 50%; display: inline-block;'></span><span>  F0-F1 or EF0-EF1</span><br>"
-  div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + ORANGE + "; border-radius: 50%; display: inline-block;'></span><span>  F2-F3 or EF2-EF3</span><br>"
-  div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + RED + "; border-radius: 50%; display: inline-block;'></span><span>  F4-F5 or EF4-EF5</span><br>"
+  div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + YELLOW + "; border-radius: 50%; display: inline-block;'></span><span>  EF0-EF1 </span><br>"
+  div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + ORANGE + "; border-radius: 50%; display: inline-block;'></span><span>  EF2-EF3</span><br>"
+  div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + RED + "; border-radius: 50%; display: inline-block;'></span><span>  EF4-EF5</span><br>"
   div.innerHTML += "<span style='height: 10px; width: 10px; background-color:" + UNSPEC + "; border-radius: 50%; display: inline-block;'></span><span>  Unknown severity</span><br>"
 
   div.style = "background-color: white; padding: 5px; border: 1px solid black; border-radius: 5px"
@@ -133,4 +133,24 @@ legend.onAdd = function (map) {
 };
 
 legend.addTo(map);
+
+
+// add legend 
+var header = L.control({position: "topleft"});
+header.onAdd = function (map) {
+
+  var div = L.DomUtil.create("div", "top-left-header");
+
+  var head = L.DomUtil.create("div", "top-left-title");
+  head.innerHTML = "Arkansas tornadoes (1950-2021)";
+  var subhead = L.DomUtil.create("div", "top-left-subtitle");
+  subhead.innerHTML = "Arkansas saw more than 2,300 recorded tornadoes between 1950 and 2021, according to the National Oceanic and Atmospheric Administration. Click on a tornado path to get more information about that tornado.";
+
+  div.appendChild(head);
+  div.appendChild(subhead);
+  return div;
+
+};
+
+header.addTo(map);
 

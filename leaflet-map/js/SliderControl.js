@@ -64,7 +64,7 @@ L.Control.SliderControl = L.Control.extend({
 
         // Create a control sliderContainer with a jquery ui slider
         var sliderContainer = L.DomUtil.create('div', 'slider', this._container);
-        $(sliderContainer).append('<div id="leaflet-slider" style="width:280px"></div></div><span id="start-time" style="display:inline-block; margin-right: 233px">' + this.options.start_date + '</span><span id="end-time" style="display:inline-block">' + this.options.end_date + '</span>');
+        $(sliderContainer).append('<div id="leaflet-slider" style="width:280px"></div></div><span id="start-time" style="display:inline-block; margin-right: 160px">' + this.options.start_date + '</span><span id="end-time" style="display:inline-block">' + this.options.end_date + '</span>');
         //Prevent map panning/zooming while using the slider
         $(sliderContainer).mousedown(function () {
             map.dragging.disable();
