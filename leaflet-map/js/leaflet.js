@@ -1966,7 +1966,7 @@
         te = Xi.extend({
             options: {
                 position: "bottomright",
-                prefix: '<a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>'
+                prefix: '<a href="https://leafletjs.com" title="A JS library for interactive maps">Powered by Leaflet</a>'
             },
             initialize: function(t) {
                 c(this, t), this._attributions = {}

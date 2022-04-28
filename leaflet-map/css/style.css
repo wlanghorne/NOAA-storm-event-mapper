@@ -1,0 +1,23 @@
+#map {
+  width: 650px; 
+  height: 620px; 
+  background: #F8F8F8
+}
+
+.top-left-header, .legend {
+  background: #F8F8F8; 
+  padding: 5px; 
+  border: 2px solid #ccc;
+  border-radius: 5px
+}
+
+.top-left-title {
+  font-size: 200%;
+  font-weight: bold;
+}
+
+.top-left-subtitle {
+  font-size: 90%;
+  width: 550px;
+}
+
