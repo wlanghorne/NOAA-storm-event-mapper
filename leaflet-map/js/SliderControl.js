@@ -20,6 +20,7 @@ L.Control.SliderControl = L.Control.extend({
         maxValue: -1,
         minValue: 0,
         showAllOnStart: false,
+        showSomeOnStart: false,
         markers: null,
         range: false,
         follow: false,
@@ -64,7 +65,7 @@ L.Control.SliderControl = L.Control.extend({
 
         // Create a control sliderContainer with a jquery ui slider
         var sliderContainer = L.DomUtil.create('div', 'slider', this._container);
-        $(sliderContainer).append('<div id="leaflet-slider" style="width:280px"></div></div><span id="start-time" style="display:inline-block; margin-right: 160px">' + this.options.start_date + '</span><span id="end-time" style="display:inline-block">' + this.options.end_date + '</span>');
+        $(sliderContainer).append('<div id="leaflet-slider" style="width:280px"></div></div><span id="start-time" style="display:inline-block; margin-right: 160px"></span><span id="end-time" style="display:inline-block"></span>');
         //Prevent map panning/zooming while using the slider
         $(sliderContainer).mousedown(function () {
             map.dragging.disable();
@@ -114,6 +115,13 @@ L.Control.SliderControl = L.Control.extend({
             if(_options.range) _options.values = [_options.minValue,_options.maxValue];
             else _options.value = _options.maxValue;
         }
+        if(_options.showSomeOnStart){
+            index_start = _options.maxValue-1066;
+            if(_options.range) _options.values = [_options.minValue,_options.maxValue-1066];
+            else _options.value = _options.maxValue;
+        }
+        start_time.innerHTML = _options.markers[_options.values[0]].feature.properties[_options.timeAttribute]
+        end_time.innerHTML = _options.markers[_options.values[1]].feature.properties[_options.timeAttribute]
         $("#leaflet-slider").slider({
             range: _options.range,
             value: _options.value,

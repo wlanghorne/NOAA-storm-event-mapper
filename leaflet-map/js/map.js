@@ -32,6 +32,7 @@ var lightStyle = {
 
 // initialize the map
 var map = L.map('map').setView([34.8, -92.3], 7);
+map.attributionControl.addAttribution('Source: <a href="https://www.ncdc.noaa.gov/stormevents/">National Oceanic and Atmospheric Administration</a>');
 map.options.minZoom = 7;
 map.options.maxZoom = 13; 
 
@@ -107,7 +108,7 @@ $.getJSON("./geojson/NOAA_ARKANSAS_tornado.geojson", function(data){
         layer: tornadolayer, 
         timeAttribute: "date",
         range: true,
-        showAllOnStart: true,
+        showSomeOnStart: true,
         start_date: "01/13/1950",
         end_date: "12/10/2021"
     });
