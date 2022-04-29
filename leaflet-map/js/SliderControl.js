@@ -116,12 +116,12 @@ L.Control.SliderControl = L.Control.extend({
             else _options.value = _options.maxValue;
         }
         if(_options.showSomeOnStart){
-            index_start = _options.maxValue-1066;
-            if(_options.range) _options.values = [_options.minValue,_options.maxValue-1066];
+            index_start = _options.minValue+1252;
+            if(_options.range) _options.values = [_options.minValue+1252,_options.maxValue];
             else _options.value = _options.maxValue;
         }
-        start_time.innerHTML = _options.markers[_options.values[0]].feature.properties[_options.timeAttribute]
-        end_time.innerHTML = _options.markers[_options.values[1]].feature.properties[_options.timeAttribute]
+        start_time.innerHTML = _options.markers[_options.values[0]].feature.properties[_options.timeAttribute];
+        end_time.innerHTML = _options.markers[_options.values[1]].feature.properties[_options.timeAttribute];
         $("#leaflet-slider").slider({
             range: _options.range,
             value: _options.value,
@@ -204,7 +204,7 @@ L.Control.SliderControl = L.Control.extend({
         if (!_options.range && _options.alwaysShowDate) {
             $('#slider-timestamp').html(_extractTimeStamp(_options.markers[index_start].feature.properties[_options.timeAttribute], _options));
         }
-        for (i = _options.minValue; i <= index_start; i++) {
+        for (i = _options.maxValue; i >= index_start; i--) {
             _options.map.addLayer(_options.markers[i]);
         }
     }
